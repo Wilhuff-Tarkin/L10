@@ -38,14 +38,12 @@ public class SelectableTest extends TestBase {
 
     @Test
     void selectFileByTextOption() {
-
         WebElement fileBtn = driver.findElement(By.cssSelector("#files-button"));
         fileBtn.click();
         WebElement fileSelect = driver.findElement(By.cssSelector("#files"));
         Select selectFile = new Select(fileSelect);
         selectFile.selectByVisibleText("jQuery.js");
         log.info("Select by text check");
-
     }
 
     @Test
@@ -59,14 +57,11 @@ public class SelectableTest extends TestBase {
 
     @Test
     void selectRandomTitle() {
-
         WebElement salutationBtn = driver.findElement(By.cssSelector("#salutation-button"));
         salutationBtn.click();
         List<WebElement> salutations = driver.findElements(By.cssSelector("#salutation-menu li:not(:first-child)"));
         getRandomElement(salutations).click();
         log.info("Select random title check");
-
-
     }
 
 }

@@ -26,7 +26,7 @@ public class IframesTest extends TestBase {
         driver.switchTo().frame("iframe2");
         driver.findElement(By.cssSelector("#inputLogin")).sendKeys("Steven");
         driver.findElement(By.cssSelector("#inputPassword")).sendKeys("topsecret");
-        List<WebElement> continentOptions = driver.findElements(By.cssSelector("#inlineFormCustomSelectPref"));
+        List<WebElement> continentOptions = driver.findElements(By.cssSelector("#inlineFormCustomSelectPref option"));
         getRandomElement(continentOptions).click();
         List<WebElement> yearsOfExperience = driver.findElements(By.cssSelector("input[name='gridRadios']"));
         getRandomElement(yearsOfExperience).click();
