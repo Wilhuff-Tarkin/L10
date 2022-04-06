@@ -10,7 +10,6 @@ public class WindowsTabsTest extends TestBase {
 
     private static final Logger log = LoggerFactory.getLogger(WindowsTabsTest.class);
     private static final String path = "https://seleniumui.moderntester.pl/windows-tabs.php";
-    TablesTest tablesTest = new TablesTest();
 
 
     @Test

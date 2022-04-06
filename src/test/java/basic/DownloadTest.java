@@ -1,5 +1,7 @@
 package basic;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -14,6 +16,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class DownloadTest extends TestBase {
@@ -21,7 +25,14 @@ public class DownloadTest extends TestBase {
     private static final Logger log = LoggerFactory.getLogger(FormTest.class);
     private static final Path path = Paths.get(downloadFilepath);
     private static final String fileName = "test-file-to-download.xlsx";
-    private static final File file = new File(path +"\\"+fileName);
+
+    @BeforeAll
+    static void additionalSetup() {
+        Map<String, Object> prefs = new HashMap<>();
+        prefs.put("download.default_directory", file.getAbsolutePath());
+        log.info(">>>>>  Setting downloads location to " + file.getAbsolutePath());
+        options.setExperimentalOption("prefs", prefs);
+    }
 
     @Test
     public void shouldDownloadFile()  {
@@ -63,5 +74,4 @@ public class DownloadTest extends TestBase {
         FluentWait<WebDriver> wait = new FluentWait<>(driver).withTimeout(Duration.ofSeconds(10)).pollingEvery(Duration.ofMillis(100));
         wait.until(x -> checkNumberOfFilesInDir(downloadFilepath)>numberOfFilesBeforeDownload);
     }
-
 }

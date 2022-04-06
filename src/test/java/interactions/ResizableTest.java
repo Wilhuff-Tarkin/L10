@@ -2,9 +2,7 @@ package interactions;
 
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,32 +10,63 @@ import testbase.TestBase;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
-
 public class ResizableTest extends TestBase {
 
-    private static final Logger log = LoggerFactory.getLogger(DraggableTest.class);
+    private static final Logger log = LoggerFactory.getLogger(ResizableTest.class);
     private static final String path = "https://seleniumui.moderntester.pl/resizable.php";
 
-//
-//    resize window to the right (10px)
-//2.resize window to the bottom (10px)
-//3.resize windwo to the right and bottom (10px,10px
 
     @Test
-    void resizeTest() throws InterruptedException {
-
+    public void shouldResize10toTheRight() throws InterruptedException {
         driver.get(path);
         WebElement resizableSquare = driver.findElement(By.cssSelector("#resizable"));
-
-
-//        int width = resizableSquare.getSize().getWidth();
+        WebElement xAxisHandle = driver.findElement(By.cssSelector(".ui-resizable-handle.ui-resizable-e"));
+        int initialWidth = resizableSquare.getSize().width;
+        int expectedWidth = initialWidth + 10;
         Actions action = new Actions(driver);
-        action.clickAndHold(resizableSquare).moveByOffset(10, 0).release().build().perform();
-        Thread.sleep(122);
 
-
-
-
+        while (resizableSquare.getSize().width != expectedWidth) {
+            action.clickAndHold(xAxisHandle).moveByOffset(19, 0).release().build().perform();
+            Thread.sleep(150);
+        }
+        assertThat("Not resized as expected", expectedWidth == resizableSquare.getSize().width);
+        log.info("Resize on x axis check");
     }
 
+
+    @Test
+    void shouldResize10toTheBottom() throws InterruptedException {
+        driver.get(path);
+        WebElement yAxisHandle = driver.findElement(By.cssSelector(".ui-resizable-handle.ui-resizable-s"));
+        WebElement resizableSquare = driver.findElement(By.cssSelector("#resizable"));
+        int initialHeight = resizableSquare.getSize().height;
+        int expectedHeight = initialHeight + 10;
+        Actions action = new Actions(driver);
+
+        while (resizableSquare.getSize().height != expectedHeight) {
+            action.clickAndHold(yAxisHandle).moveByOffset(0, 19).release().build().perform();
+            Thread.sleep(150);
+        }
+        assertThat("Not resized as expected", expectedHeight == resizableSquare.getSize().height);
+        log.info("Resize on y axis check");
+    }
+
+    @Test
+    void shouldResize10onBothAxis() throws InterruptedException {
+        driver.get(path);
+        WebElement resizableSquare = driver.findElement(By.cssSelector("#resizable"));
+        int initialHeight = resizableSquare.getSize().height;
+        int expectedHeight = initialHeight + 10;
+        int initialWidth = resizableSquare.getSize().width;
+        int expectedWidth = initialWidth + 10;
+        Actions action = new Actions(driver);
+        WebElement xyAxisHandle = driver.findElement(By.cssSelector(".ui-icon-gripsmall-diagonal-se"));
+
+        while (resizableSquare.getSize().height != expectedHeight || resizableSquare.getSize().width != expectedWidth) {
+            action.clickAndHold(xyAxisHandle).moveByOffset(19, 19).release().build().perform();
+            Thread.sleep(150);
+        }
+        assertThat("Not resized as expected", expectedHeight == resizableSquare.getSize().height && expectedWidth == resizableSquare.getSize().width);
+        log.info("Resize on both axis check");
+    }
 }
