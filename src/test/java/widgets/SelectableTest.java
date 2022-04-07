@@ -5,9 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import testbase.TestBase;
@@ -16,19 +14,16 @@ import java.util.List;
 
 public class SelectableTest extends TestBase {
 
-    private static final Logger log = LoggerFactory.getLogger(FormTest.class);
+    private static final Logger log = LoggerFactory.getLogger(SelectableTest.class);
     private static final String path = "https://seleniumui.moderntester.pl/selectmenu.php";
-
 
     @BeforeEach
     void additionalSetup() {
         driver.get(path);
     }
 
-
     @Test
     void selectRandomSpeed() {
-
         WebElement speedBtn = driver.findElement(By.cssSelector("#speed-button"));
         speedBtn.click();
         List<WebElement> speedOptions = driver.findElements(By.cssSelector("#speed-menu li"));
@@ -47,7 +42,7 @@ public class SelectableTest extends TestBase {
     }
 
     @Test
-    void selectNumberByIx()  {
+    void selectNumberByIx() {
         WebElement numberBtn = driver.findElement(By.cssSelector("#number-button"));
         numberBtn.click();
         WebElement firstOption = driver.findElement(By.cssSelector("#number-menu .ui-menu-item:first-child"));
@@ -63,5 +58,4 @@ public class SelectableTest extends TestBase {
         getRandomElement(salutations).click();
         log.info("Select random title check");
     }
-
 }

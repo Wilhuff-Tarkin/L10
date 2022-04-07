@@ -5,6 +5,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.provider.Arguments;
+import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,6 +26,8 @@ public class TestBase {
 
     private static final Logger log = LoggerFactory.getLogger(TestBase.class);
     public static String downloadFilepath = "src/main/resources/downloads";
+    public static String screenshotsFilepath = "src/main/resources/screenshots";
+
     public static File file = new File(downloadFilepath);
     public static ChromeOptions options = new ChromeOptions();
     public WebDriver driver;
@@ -33,13 +36,7 @@ public class TestBase {
     static void setup() {
         WebDriverManager.chromedriver().setup();
         log.info(">>>>>  Driver initiated successfully.");
-
-//        Map<String, Object> prefs = new HashMap<>();
-//        prefs.put("download.default_directory", file.getAbsolutePath());
-//        log.info(">>>>>  Setting downloads location to " + file.getAbsolutePath());
-//        options.setExperimentalOption("prefs", prefs);
-//        options.addArguments("Start-maximized");
-
+        options.addArguments("Start-maximized");
     }
 
     public static WebElement getRandomElement(List<WebElement> elements) {
@@ -77,10 +74,10 @@ public class TestBase {
         );
     }
 
-    public static boolean isElementVisible(WebElement element) {
+    public boolean isElementVisible(String element) {
         try {
-            return element.isDisplayed();
-        } catch (NoSuchElementException err) {
+            return driver.findElement(By.cssSelector(element)).isDisplayed();
+        } catch (NoSuchElementException e) {
             return false;
         }
     }

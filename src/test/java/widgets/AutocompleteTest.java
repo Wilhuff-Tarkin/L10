@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import testbase.TestBase;
+
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -31,6 +32,6 @@ public class AutocompleteTest extends TestBase {
         String selectedOptionText = selectedOption.getText();
         selectedOption.click();
         assertThat("Selection not as expected", searchbar.getAttribute("value").equals(selectedOptionText));
-        log.info("Autocomplete test check");
+        log.info(">>>>>  Autocomplete test check");
     }
 }

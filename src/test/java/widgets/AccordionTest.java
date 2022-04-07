@@ -19,10 +19,8 @@ public class AccordionTest extends TestBase {
     private static final String path = "https://seleniumui.moderntester.pl/accordion.php";
     private static final Logger log = LoggerFactory.getLogger(AccordionTest.class);
 
-
     @Test
     void accordionTest() {
-
         driver.get(path);
         List<WebElement> sections = driver.findElements(By.cssSelector("#accordion h3"));
         Assertions.assertNotEquals(0, sections.size());

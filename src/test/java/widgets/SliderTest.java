@@ -1,6 +1,5 @@
 package widgets;
 
-import basic.FormTest;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -13,12 +12,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class SliderTest extends TestBase {
 
-    private static final Logger log = LoggerFactory.getLogger(FormTest.class);
+    private static final Logger log = LoggerFactory.getLogger(SliderTest.class);
     private static final String path = "https://seleniumui.moderntester.pl/slider.php";
 
     @Test
     void shouldMovieSlider() throws InterruptedException {
-
         driver.get(path);
         WebElement handle = driver.findElement(By.cssSelector("#custom-handle"));
         moveSliderToTheRight(50, handle);
@@ -32,7 +30,7 @@ public class SliderTest extends TestBase {
     private void moveSliderToTheLeft(int expectedPosition, WebElement handle) throws InterruptedException {
         int currentPosition = getHandlePosition(handle);
         handle.click();
-        while (currentPosition > expectedPosition){
+        while (currentPosition > expectedPosition) {
             handle.sendKeys(Keys.ARROW_LEFT);
             currentPosition--;
         }
@@ -43,7 +41,7 @@ public class SliderTest extends TestBase {
     private void moveSliderToTheRight(int expectedPosition, WebElement handle) throws InterruptedException {
         int currentPosition = getHandlePosition(handle);
         handle.click();
-        while (currentPosition < expectedPosition){
+        while (currentPosition < expectedPosition) {
             handle.sendKeys(Keys.ARROW_RIGHT);
             currentPosition++;
         }

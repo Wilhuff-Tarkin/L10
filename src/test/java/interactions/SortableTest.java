@@ -51,6 +51,7 @@ public class SortableTest extends TestBase {
         }
         log.info(String.valueOf(stringBuilder));
     }
+
     private List<WebElement> getList() {
         driver.get(path);
         return driver.findElements(By.cssSelector("#sortable li"));

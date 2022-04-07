@@ -12,7 +12,6 @@ import testbase.TestBase;
 import java.awt.*;
 
 public class DraggableTest extends TestBase {
-
     private static final Logger log = LoggerFactory.getLogger(DraggableTest.class);
     private static final String path = "https://seleniumui.moderntester.pl/draggable.php";
 
@@ -34,7 +33,7 @@ public class DraggableTest extends TestBase {
         action.dragAndDropBy(square, getPositionOffset(Directions.BOTTOM_LEFT).x, getPositionOffset(Directions.BOTTOM_LEFT).y).perform();
         Thread.sleep(100);
 
-        log.info("Draggable check");
+        log.info(">>>>>  Draggable check");
     }
 
     public Point getPositionOffset(Directions direction) {
@@ -58,6 +57,6 @@ public class DraggableTest extends TestBase {
     }
 
     public enum Directions {
-        UPPER_RIGHT, BOTTOM_RIGHT, CENTER, BOTTOM_LEFT;
+        UPPER_RIGHT, BOTTOM_RIGHT, CENTER, BOTTOM_LEFT
     }
 }

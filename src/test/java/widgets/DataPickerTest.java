@@ -30,18 +30,14 @@ public class DataPickerTest extends TestBase {
     LocalDate firstDayFromNextMonth = LocalDate.of(2022, 5, 1);
     LocalDate lastDayOfJanuaryNextYear = LocalDate.of(2023, 1, 31);
 
-    public enum Direction {
-        FORWARD, BACKWARD;
-    }
-
     @Test
     void pickToday() {
         openDatePicker();
         String todayDay = String.valueOf(today.getDayOfMonth());
-        List <WebElement> calendarPage = getCalendarPage();
+        List<WebElement> calendarPage = getCalendarPage();
         clickOnGivenDay(calendarPage, todayDay);
         assertThat("Date incorrect", getChosenDate(), (is(equalTo(today.format(usDateFormat)))));
-        log.info("Pick todays date check");
+        log.info(">>>>>  Pick todays date check");
     }
 
     @Test
@@ -50,7 +46,7 @@ public class DataPickerTest extends TestBase {
         clickOnNextBtn();
         clickOnGivenDay(getCalendarPage(), "1");
         assertThat("Date incorrect", getChosenDate(), (is(equalTo(firstDayFromNextMonth.format(usDateFormat)))));
-        log.info("Pick 1st date from next month check");
+        log.info(">>>>>  Pick 1st date from next month check");
     }
 
     @Test
@@ -59,7 +55,7 @@ public class DataPickerTest extends TestBase {
         jumpTo("January", 2023, Direction.FORWARD);
         clickOnGivenDay(getCalendarPage(), "31");
         assertThat("Date incorrect", getChosenDate(), (is(equalTo(lastDayOfJanuaryNextYear.format(usDateFormat)))));
-        log.info("Pick last day from January next year check");
+        log.info(">>>>>  Pick last day from January next year check");
     }
 
     @Test
@@ -70,7 +66,7 @@ public class DataPickerTest extends TestBase {
         driver.findElement(By.cssSelector("#datepicker")).click();
         clickOnGivenDay(getCalendarPage(), "31");
         assertThat("Date incorrect", getChosenDate(), (is(equalTo(lastDayOfJanuaryNextYear.format(usDateFormat)))));
-        log.info("Pick day again check");
+        log.info(">>>>>  Pick day again check");
     }
 
     @Test
@@ -83,7 +79,7 @@ public class DataPickerTest extends TestBase {
         LocalDate randomDateFromPreviousMonth = LocalDate.of(Integer.parseInt(getYearFromPage().getText()), parsedMonth, Integer.parseInt(day));
         clickOnGivenDay(calendarPage, day);
         assertThat("Date incorrect", getChosenDate(), (is(equalTo(randomDateFromPreviousMonth.format(usDateFormat)))));
-        log.info("Pick random day from previous month check");
+        log.info(">>>>>  Pick random day from previous month check");
     }
 
     @Test
@@ -101,7 +97,7 @@ public class DataPickerTest extends TestBase {
         log.info("Random date from prev year is " + expectedDate.format(usDateFormat));
         log.info("Chosen date is " + getChosenDate());
         assertThat("Date incorrect", getChosenDate(), (is(equalTo(expectedDate.format(usDateFormat)))));
-        log.info("Pick random day from previous year check");
+        log.info(">>>>>  Pick random day from previous year check");
     }
 
     private int getRandomMonth() {
@@ -184,5 +180,9 @@ public class DataPickerTest extends TestBase {
     private void clickOnPrevBtn() {
         WebElement prevBtn = driver.findElement(By.cssSelector("a[data-handler='prev']"));
         prevBtn.click();
+    }
+
+    public enum Direction {
+        FORWARD, BACKWARD
     }
 }

@@ -9,11 +9,12 @@ import org.openqa.selenium.interactions.Actions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import testbase.TestBase;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class SelectableTest extends TestBase {
 
-    private static final Logger log = LoggerFactory.getLogger(DraggableTest.class);
+    private static final Logger log = LoggerFactory.getLogger(SelectableTest.class);
     private static final String path = "https://seleniumui.moderntester.pl/selectable.php";
 
     @Test

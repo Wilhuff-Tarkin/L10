@@ -14,7 +14,7 @@ import java.time.Duration;
 
 public class MenuTest extends TestBase {
 
-    private static final Logger log = LoggerFactory.getLogger(FormTest.class);
+    private static final Logger log = LoggerFactory.getLogger(MenuTest.class);
     private static final String path = "https://seleniumui.moderntester.pl/menu-item.php";
 
     @Test

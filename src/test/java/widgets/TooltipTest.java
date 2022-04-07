@@ -11,7 +11,6 @@ import testbase.TestBase;
 import java.util.List;
 
 public class TooltipTest extends TestBase {
-
     private static final Logger log = LoggerFactory.getLogger(FormTest.class);
     private static final String path = "https://seleniumui.moderntester.pl/tooltip.php";
 
@@ -26,11 +25,6 @@ public class TooltipTest extends TestBase {
             log.info("Tooltip " + counter + " of " + titleTooltips.size());
             log.info(titleTooltips.get(i).getAttribute("title"));
         }
-
-        log.info("Tooltips check");
-
+        log.info(">>>>>  Tooltips check");
     }
-
-
-
 }

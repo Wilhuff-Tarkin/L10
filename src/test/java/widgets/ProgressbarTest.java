@@ -12,8 +12,7 @@ import testbase.TestBase;
 import java.time.Duration;
 
 public class ProgressbarTest extends TestBase {
-
-    private static final Logger log = LoggerFactory.getLogger(FormTest.class);
+    private static final Logger log = LoggerFactory.getLogger(ProgressbarTest.class);
     private static final String path = "https://seleniumui.moderntester.pl/progressbar.php";
 
     @Test

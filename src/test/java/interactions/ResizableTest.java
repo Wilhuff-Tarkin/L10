@@ -15,9 +15,8 @@ public class ResizableTest extends TestBase {
     private static final Logger log = LoggerFactory.getLogger(ResizableTest.class);
     private static final String path = "https://seleniumui.moderntester.pl/resizable.php";
 
-
     @Test
-    public void shouldResize10toTheRight() throws InterruptedException {
+    public void shouldResize10toTheRight() {
         driver.get(path);
         WebElement resizableSquare = driver.findElement(By.cssSelector("#resizable"));
         WebElement xAxisHandle = driver.findElement(By.cssSelector(".ui-resizable-handle.ui-resizable-e"));
@@ -27,15 +26,13 @@ public class ResizableTest extends TestBase {
 
         while (resizableSquare.getSize().width != expectedWidth) {
             action.clickAndHold(xAxisHandle).moveByOffset(19, 0).release().build().perform();
-            Thread.sleep(150);
         }
         assertThat("Not resized as expected", expectedWidth == resizableSquare.getSize().width);
         log.info("Resize on x axis check");
     }
 
-
     @Test
-    void shouldResize10toTheBottom() throws InterruptedException {
+    void shouldResize10toTheBottom() {
         driver.get(path);
         WebElement yAxisHandle = driver.findElement(By.cssSelector(".ui-resizable-handle.ui-resizable-s"));
         WebElement resizableSquare = driver.findElement(By.cssSelector("#resizable"));
@@ -45,14 +42,13 @@ public class ResizableTest extends TestBase {
 
         while (resizableSquare.getSize().height != expectedHeight) {
             action.clickAndHold(yAxisHandle).moveByOffset(0, 19).release().build().perform();
-            Thread.sleep(150);
         }
         assertThat("Not resized as expected", expectedHeight == resizableSquare.getSize().height);
         log.info("Resize on y axis check");
     }
 
     @Test
-    void shouldResize10onBothAxis() throws InterruptedException {
+    void shouldResize10onBothAxis() {
         driver.get(path);
         WebElement resizableSquare = driver.findElement(By.cssSelector("#resizable"));
         int initialHeight = resizableSquare.getSize().height;
@@ -64,7 +60,6 @@ public class ResizableTest extends TestBase {
 
         while (resizableSquare.getSize().height != expectedHeight || resizableSquare.getSize().width != expectedWidth) {
             action.clickAndHold(xyAxisHandle).moveByOffset(19, 19).release().build().perform();
-            Thread.sleep(150);
         }
         assertThat("Not resized as expected", expectedHeight == resizableSquare.getSize().height && expectedWidth == resizableSquare.getSize().width);
         log.info("Resize on both axis check");
