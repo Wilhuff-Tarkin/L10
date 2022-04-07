@@ -24,102 +24,107 @@ public class FormPage {
     @FindBy(id = "inputEmail3")
     private WebElement email;
 
-    @FindBy (name = "gridRadiosSex")
-    private List <WebElement> sex;
+    @FindBy(id = "inputAge3")
+    private WebElement age;
 
-    @FindBy (name = "gridRadiosExperience")
-    private List <WebElement> yearsOfExperience;
+    @FindBy(name = "gridRadiosSex")
+    private List<WebElement> sex;
 
+    @FindBy(name = "gridRadiosExperience")
+    private List<WebElement> yearsOfExperience;
 
-
-    @FindBy (id = "validator-message")
+    @FindBy(id = "validator-message")
     private WebElement actualMessage;
 
-    public FormPage (WebDriver driver){
+    @FindBy(id = "gridCheckAutomationTester")
+    private WebElement professionAutoTester;
+
+    @FindBy(id = "selectContinents")
+    private WebElement continents;
+
+    @FindBy(css = "option[value=switch-commands]")
+    private WebElement seleniumCommands1;
+
+    @FindBy(css = "option[value=wait-commands]")
+    private WebElement seleniumCommands2;
+
+    @FindBy(id = "chooseFile")
+    private WebElement chooseFile;
+
+    @FindBy(id = "additionalInformations")
+    private WebElement additionalInfo;
+
+    @FindBy(css = ".btn-primary")
+    private WebElement signInButton;
+
+
+    public FormPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
     }
-
-    public void setFirstName (String name){
-        this.firstName.sendKeys(name);
-    }
-
-    public void setLastName (String lastName){
-        this.lastName.sendKeys(lastName);
-    }
-    public void setEmail (String email){
-        this.email.sendKeys(email);
-    }
-
-    public void selectRandomSex () {
-        getRandomElement(sex).click();
-    }
-
-    public void selectRandomExperience () {
-        getRandomElement(yearsOfExperience).click();
-    }
-
-    public WebElement getActualMessage() {
-        return actualMessage;
-    }
-
-//
-//    List<WebElement> sexs = driver.findElements(By.cssSelector("input[name='gridRadiosSex']"));
-//
-//        log.info(">>>>>  Sex randomized check");
-//
-//
-//    WebElement age = driver.findElement(By.cssSelector("#inputAge3"));
-//        age.sendKeys("29");
-//        log.info(">>>>>  Age sent check");
-//
-//    List <WebElement> yearsOfExperience = driver.findElements(By.cssSelector("input[name='gridRadiosExperience']"));
-//    getRandomElement(yearsOfExperience).click();
-//        log.info(">>>>>  Years of experience randomized check");
-//
-//    WebElement profession = driver.findElement(By.cssSelector("#gridCheckAutomationTester"));
-//        profession.click();
-//        log.info(">>>>>  Profession check");
-//
-//
-//    List <WebElement> continentOptions = driver.findElements(By.cssSelector("#selectContinents option"));
-//    assertThat("First option changed", (continentOptions.get(0).getText()).equals("Choose..."));
-//        log.info(">>>>>  Removing placeholder option from continents: " + continentOptions.get(0).getText());
-//        continentOptions.remove(0);
-//    getRandomElement(continentOptions).click();
-//        log.info(">>>>>  Continent check");
-//
-//
-//    WebElement seleniumCommands1 = driver.findElement(By.cssSelector("option[value=switch-commands]"));
-//    WebElement seleniumCommands2 = driver.findElement(By.cssSelector("option[value=wait-commands]"));
-//    Actions actionProvider = new Actions(driver);
-//    Action selectWithCtrl = actionProvider.keyDown(Keys.CONTROL).click(seleniumCommands1).click(seleniumCommands2).build();
-//        selectWithCtrl.perform();
-//        log.info(">>>>>  Commands check");
-//
-//
-//    File file = new File("src/main/resources/file.txt");
-//        driver.findElement(By.id("chooseFile")).sendKeys(file.getAbsolutePath());
-//        log.info(">>>>>  File sent check");
-//
-//
-//    WebElement additionalInformation = driver.findElement(By.cssSelector("#additionalInformations"));
-//        additionalInformation.click();
-//        additionalInformation.sendKeys("some additional information");
-//        log.info(">>>>>  Additional info check");
-//
-//
-//    WebElement signInBtn = driver.findElement(By.cssSelector(".btn-primary"));
-//        signInBtn.click();
-//
-//    String actualMessage = driver.findElement(By.id("validator-message")).getText();
-//
-
-
-
 
     public static WebElement getRandomElement(List<WebElement> elements) {
         return elements.get(new Random().nextInt(elements.size()));
     }
 
+    public void setFirstName(String name) {
+        this.firstName.sendKeys(name);
+    }
 
+    public void setLastName(String lastName) {
+        this.lastName.sendKeys(lastName);
+    }
+
+    public void setEmail(String email) {
+        this.email.sendKeys(email);
+    }
+
+    public void selectRandomSex() {
+        getRandomElement(sex).click();
+    }
+
+    public void selectRandomExperience() {
+        getRandomElement(yearsOfExperience).click();
+    }
+
+    public String getActualMessage() {
+        return actualMessage.getText();
+    }
+
+    public void setProfession() {
+        professionAutoTester.click();
+    }
+
+    public void sendFile() {
+        File file = new File("src/main/resources/file.txt");
+        chooseFile.sendKeys(file.getAbsolutePath());
+    }
+
+    public void signIn() {
+        signInButton.click();
+    }
+
+    public void setAge(int age) {
+        this.age.sendKeys(String.valueOf(age));
+    }
+
+    public void setRandomContinent() {
+
+        List<WebElement> listOfContinents = continents.findElements(By.cssSelector("option"));
+
+        if (listOfContinents.get(0).getText().equals("Choose...")) {
+            listOfContinents.remove(0);
+        }
+        getRandomElement(listOfContinents).click();
+    }
+
+    public void setCommands(WebDriver driver) {
+        Actions actionProvider = new Actions(driver);
+        Action selectWithCtrl = actionProvider.keyDown(Keys.CONTROL).click(seleniumCommands1).click(seleniumCommands2).build();
+        selectWithCtrl.perform();
+    }
+
+    public void fillAdditionalInfo() {
+        additionalInfo.click();
+        additionalInfo.sendKeys("some additional information");
+    }
 }

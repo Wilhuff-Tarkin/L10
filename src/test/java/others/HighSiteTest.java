@@ -1,45 +1,41 @@
 package others;
 
-import basic.WindowsTabsTest;
-import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import testbase.TestBase;
 
-import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-
-public class HighSiteTest  extends TestBase {
+public class HighSiteTest extends TestBase {
 
     private static final Logger log = LoggerFactory.getLogger(HighSiteTest.class);
     private static final String path = "https://seleniumui.moderntester.pl/high-site.php";
-//    private static final Path downloadPath = Paths.get(downloadFilepath);
 
-
+    @FindBy(css = "#scroll-button")
+    private WebElement submitButton;
 
     @Test
     public void shouldScrollTillButtonVisible() {
 
+        driver.get(path);
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
 
-        WebElement submitButton = driver.findElement(By.cssSelector(".lead.high-site-paragraph.show-button"));
+        while (!buttonIsVisible()) {
+            jse.executeScript("window.scrollBy(0,50)");
+        }
 
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].scrollIntoView(true);",submitButton);
-
-
-
-        log.info("Scrolled to button");
-
+        System.out.println("button displayed");
     }
 
-
-
+    public boolean buttonIsVisible() {
+        try {
+            return submitButton.isDisplayed();
+        } catch (NoSuchElementException err) {
+            return false;
+        }
+    }
 
 }
